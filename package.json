@@ -1,0 +1,29 @@
+{
+  "name": "dfxio",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "dfxio": "bin/dfxio"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lindakung/dfxio.git"
+  },
+  "author": "Linda Kung <linda@cedrusco.com> (http://lindakung.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lindakung/dfxio/issues"
+  },
+  "homepage": "https://github.com/lindakung/dfxio#readme",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "chalk": "^1.1.3",
+    "fs-finder": "^1.8.1",
+    "ncp": "^2.0.0",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.0"
+  }
+}
