@@ -7,7 +7,7 @@
     function resume(modulesLoaded) {
       //there should be a way to dynamically add the modules to this array
       if(modulesLoaded === numOfModules) {
-        angular.resumeBootstrap(['dfxioModule', 'HelloWorldModule', 'HelloAdeleModule']);
+        angular.resumeBootstrap(['dfxioModule']);
       }
     }
 
@@ -53,7 +53,19 @@
   };
 
   angular
-    .module('dfxioModule', [])
+    .module('dfxioModule', ['dfxAppRuntime',
+        'dfxAppServices',
+        'dfxGControls',
+        'jkAngularCarousel',
+        'ngAnimate',
+        'ngMessages',
+        'ngRoute',
+        'ngSanitize',
+        'ngMaterial',
+        'ngMdIcons',
+        'ngQuill',
+        'nvd3',
+        'ui.knob'])
     .controller('dfxioController', function ($scope) {
     })
     .directive('dfxio', dfxio);
