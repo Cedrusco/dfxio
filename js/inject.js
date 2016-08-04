@@ -16,12 +16,17 @@
     "dfxio/dfx.app.services.js",
     "dfxio/dfx.gcontrols.js"];
 
-    dependencies.forEach(function(dependency) {
-        var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script'); 
+    if(document) {
+        dependencies.forEach(function(dependency) {
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script'); 
 
-        script.src = dependency;
+            script.src = dependency;
 
-        head.appendChild(script);
-    })
+            head.appendChild(script);
+        })
+    } else {
+        return;
+    }
+    
 })();
