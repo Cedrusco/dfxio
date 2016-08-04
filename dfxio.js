@@ -1,5 +1,16 @@
 (function (angular) {
   'use strict';
+
+  //INJECT DEPENDENCY SCRIPTS
+  function inject() {
+    var head = document.getElementsByTagName('head')[0];
+    var s = document.createElement('script'); // use global document since Angular's $document is weak
+    s.src = "/inject.js";
+    head.appendChild(s);
+  }
+
+  inject();
+
   var resume;
   var count = 0;
 
