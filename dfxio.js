@@ -9,8 +9,6 @@
     head.appendChild(s);
   }
 
-  inject();
-
   var resume;
   var count = 0;
 
