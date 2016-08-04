@@ -14,10 +14,10 @@
     "/angular-jk-carousel/dist/jk-carousel.js",
     "/ng-quill/src/ng-quill.js",
     "/components.json",
-    "/dfxio.js",
-    "/dfx.app.runtime.js",
-    "/dfx.app.services.js",
-    "/dfx.gcontrols.js"];
+    "/dfxio/dfxio.js",
+    "/dfxio/dfx.app.runtime.js",
+    "/dfxio/dfx.app.services.js",
+    "/dfxio/dfx.gcontrols.js"];
 
     dependencies.forEach(function(dependency) {
         var head = document.getElementsByTagName('head')[0];
