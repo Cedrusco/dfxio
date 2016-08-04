@@ -11,14 +11,14 @@
     "/angular-sanitize/angular-sanitize.js",
     "/angular-jk-carousel/dist/jk-carousel.js",
     "/ng-quill/src/ng-quill.js",
-    "dfxio/dfxio/dfxio.js",
-    "dfxio/dfxio/dfx.app.runtime.js",
-    "dfxio/dfxio/dfx.app.services.js",
-    "dfxio/dfxio/dfx.gcontrols.js"];
+    "dfxio/dfxio.js",
+    "dfxio/dfx.app.runtime.js",
+    "dfxio/dfx.app.services.js",
+    "dfxio/dfx.gcontrols.js"];
 
     dependencies.forEach(function(dependency) {
         var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script'); // use global document since Angular's $document is weak
+        var script = document.createElement('script'); 
 
         script.src = dependency;
 
