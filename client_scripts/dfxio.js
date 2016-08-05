@@ -11,12 +11,20 @@
 
   var resume;
   var count = 0;
+  var modules = [];
+
+  var angularModule = angular.module.bind(angular);
+  angular.module = function(moduleName, moduleDependencies) {
+    modules.push(moduleName);
+    return angularModule(moduleName, moduleDependencies);
+  };
+
 
   function makeResume(numOfModules) {
-    function resume(modulesLoaded) {
+    function resume(modulesLoaded, modulesList) {
       //there should be a way to dynamically add the modules to this array
       if(modulesLoaded === numOfModules) {
-        angular.resumeBootstrap(['dfxioModule']);
+        angular.resumeBootstrap(['dfxioModule'].concat(modulesList));
       }
     }
 
@@ -31,7 +39,7 @@
 
     s.onload = function helper() {
         count++
-        resume(count)
+        resume(count, modules)
         console.log('script has loaded')
     };
 
