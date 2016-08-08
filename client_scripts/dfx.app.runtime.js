@@ -108,7 +108,7 @@ dfxAppRuntime.controller('dfx_view_controller', [ '$scope', '$rootScope', '$comp
 
     $scope.view_platform = $element.attr('dfxVePlatorm');
 
-    $scope.getGCDefaultAttributes = function( type ) {
+    $rootScope.getGCDefaultAttributes = function( type ) {
         var deferred = $q.defer();
         if ($scope.gc_types[type] != null) {
             deferred.resolve( $scope.gc_types[type] );

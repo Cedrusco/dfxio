@@ -1,14 +1,6 @@
 (function (angular) {
   'use strict';
 
-  //INJECT DEPENDENCY SCRIPTS
-  // function inject() {
-  //   var head = document.getElementsByTagName('head')[0];
-  //   var s = document.createElement('script'); // use global document since Angular's $document is weak
-  //   s.src = "/inject.js";
-  //   head.appendChild(s);
-  // }
-
   var resume;
   var count = 0;
   var modules = [];
@@ -36,6 +28,8 @@
     var s = document.createElement('script'); // use global document since Angular's $document is weak
 
     s.src = source;
+    // async false may be required!
+    s.async = false;
 
     s.onload = function helper() {
         count++
@@ -43,20 +37,16 @@
         console.log('script has loaded')
     };
 
-    // async false may be required!
-    //s.async = false;
     head.appendChild(s);
   }
 
-  window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
-
-  //load components in array
-    $.get('/components.json').success(function(data) {
-      resume = makeResume(data.length);
-      data.forEach(function(script) {
-        loadNewScript(script)
-    })
-  })
+  // load components in array
+  $.get('/components.json').success(function(data) {
+    resume = makeResume(data.length);
+    data.forEach(function(script) {
+      loadNewScript(script)
+    });
+  });
 
   var dfxio = function() {
     return {
@@ -87,8 +77,4 @@
     })
     .directive('dfxio', dfxio);
 
-  //var appName = $('[ng-app]').attr('ng-app');
-  //angular
-    //.module(appName)
-    //.requires.push('dfxioModule');
 })(angular);
