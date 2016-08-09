@@ -318,7 +318,8 @@ dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeo
                     //         $scope.addComponents( (JSON.parse(response.src)).definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
                     //     });
                     // } else {
-                        $http.get( '/hello_world/' + $attrs.dfxView + '.json' ).success(function(response) {
+                    // TODO possibly look for a better solution to what we have below, maybe dynamically look up the json path rather than relying on the directory structure convention we set
+                        $http.get( $attrs.dfxView + '/' + $attrs.dfxView + '.json' ).success(function(response) {
                             $scope.addComponents( response.definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
                         });
                     // }
