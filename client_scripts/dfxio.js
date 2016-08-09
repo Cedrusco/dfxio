@@ -34,7 +34,6 @@
     s.onload = function helper() {
         count++;
         resume(count, modules);
-        console.log('script has loaded');
     };
 
     head.appendChild(s);
@@ -73,6 +72,12 @@
         'ngQuill',
         'nvd3',
         'ui.knob'])
+    .config(function($mdThemingProvider) {
+      $mdThemingProvider
+        .theme('success-toast')
+        .primaryPalette('blue')
+        .accentPalette('orange');
+    })
     .controller('dfxioController', function ($scope) {
     })
     .directive('dfxio', dfxio);

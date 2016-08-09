@@ -319,7 +319,6 @@ dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeo
                     //     });
                     // } else {
                         $http.get( '/hello_world/' + $attrs.dfxView + '.json' ).success(function(response) {
-                          console.log('this is the response', response)
                             $scope.addComponents( response.definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
                         });
                     // }
