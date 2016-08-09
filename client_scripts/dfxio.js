@@ -32,9 +32,9 @@
     s.async = false;
 
     s.onload = function helper() {
-        count++
-        resume(count, modules)
-        console.log('script has loaded')
+        count++;
+        resume(count, modules);
+        console.log('script has loaded');
     };
 
     head.appendChild(s);
@@ -44,7 +44,7 @@
   $.get('/components.json').success(function(data) {
     resume = makeResume(data.length);
     data.forEach(function(script) {
-      loadNewScript(script)
+      loadNewScript(script);
     });
   });
 

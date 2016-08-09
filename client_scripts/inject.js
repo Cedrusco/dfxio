@@ -30,8 +30,8 @@
     script.async = false;
     
     if(dependency === "/components.json") {
-      script.setAttribute("id", "components")
-      script.setAttribute("type", "application/json")
+      script.setAttribute("id", "components");
+      script.setAttribute("type", "application/json");
     }
 
     head.appendChild(script);
