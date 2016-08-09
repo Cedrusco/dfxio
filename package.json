@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cedrusco/dfxio-npm.git"
+    "url": "git+https://github.com/Cedrusco/dfxio.git"
   },
   "author": "Linda Kung <linda@cedrusco.com> (http://lindakung.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lindakung/dfxio-npm/issues"
+    "url": "https://github.com/Cedrusco/dfxio/issues"
   },
-  "homepage": "https://github.com/lindakung/dfxio-npm#readme",
+  "homepage": "https://github.com/Cedrusco/dfxio#readme",
   "dependencies": {
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
