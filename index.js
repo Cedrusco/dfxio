@@ -13,4 +13,7 @@ router.get('/gcontrols/web/:file', function(req, res) {
   res.sendFile(filePath);
 });
 
+router.use(express.static(path.join(__dirname, '../../node_modules')));
+router.use(express.static(path.join(__dirname, '../../dfxio_components')));
+
 module.exports = router;
