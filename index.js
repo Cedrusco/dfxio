@@ -32,7 +32,7 @@ var dfxioDependencies = [
 ];
 
 dfxioDependencies.forEach(function (dependency) {
-  router.use(express.static(path.join(__dirname, '../../node_modules' + dependency)));
+  router.use('/dfxio-static/', express.static(path.join(__dirname, '../../node_modules' + dependency)));
 });
 
 router.use(express.static(path.join(__dirname, '../../dfxio_components')));

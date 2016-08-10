@@ -7,13 +7,13 @@
     "/angular-material.css",
     "/angular-material-icons.css",
     "/build/nv.d3.css",
-    "/dfx-core-gcontrols.css"];
+    "/client_scripts/dfx-core-gcontrols.css"];
 
   cssDependencies.forEach(function(dependency) {
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
 
-    link.href = dependency;
+    link.href = '/dfxio-static' + dependency;
     link.setAttribute("rel", "stylesheet");
     link.setAttribute("type", "text/css");
 
@@ -28,22 +28,22 @@
     "/angular-animate.js",
     "/angular-aria.js",
     "/angular-material.js",
-    "/angular-material-icons/angular-material-icons.js",
-    "/angular-messages/angular-messages.js",
-    "/angular-sanitize/angular-sanitize.js",
-    "/dist/angular-jk-carousel/dist/jk-carousel.js",
-    "/src/ng-quill/src/ng-quill.js",
+    "/angular-material-icons.js",
+    "/angular-messages.js",
+    "/angular-sanitize.js",
+    "/dist/jk-carousel.js",
+    "/src/ng-quill.js",
     "/components.json",
-    "/dfxio.js",
-    "/dfx.app.runtime.js",
-    "/dfx.app.services.js",
-    "/dfx.gcontrols.js"];
+    "/client_scripts/dfxio.js",
+    "/client_scripts/dfx.app.runtime.js",
+    "/client_scripts/dfx.app.services.js",
+    "/client_scripts/dfx.gcontrols.js"];
 
   jsDependencies.forEach(function(dependency) {
     var body = document.getElementsByTagName('body')[0];
     var script = document.createElement('script');
 
-    script.src = dependency;
+    script.src = '/dfxio-static' + dependency;
     script.async = false;
 
     if(dependency === "/components.json") {
