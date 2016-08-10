@@ -28,4 +28,4 @@ Use `dfxio` as you would any other express middleware:
   - Michael Bae @ Cedrus
   - Linda Kung @ Cedrus
   - Colin Meret @ Cedrus
-
+  - Olivier Poupeney @ Cedrus & Interactive Clouds
