@@ -36,7 +36,7 @@
       resume(count, modules);
     };
 
-    head.appendChild(sscript);
+    head.appendChild(script);
   }
 
   // load components in array
