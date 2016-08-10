@@ -25,18 +25,18 @@
 
   function loadNewScript(source) {
     var head = document.getElementsByTagName('head')[0];
-    var s = document.createElement('script'); // use global document since Angular's $document is weak
+    var script = document.createElement('script'); // use global document since Angular's $document is weak
 
-    s.src = source;
+    script.src = source;
     // async false may be required!
-    s.async = false;
+    script.async = false;
 
-    s.onload = function helper() {
-        count++;
-        resume(count, modules);
+    script.onload = function helper() {
+      count++;
+      resume(count, modules);
     };
 
-    head.appendChild(s);
+    head.appendChild(sscript);
   }
 
   // load components in array
@@ -60,18 +60,18 @@
 
   angular
     .module('dfxioModule', ['dfxAppRuntime',
-        'dfxAppServices',
-        'dfxGControls',
-        'jkAngularCarousel',
-        'ngAnimate',
-        'ngMessages',
-        'ngRoute',
-        'ngSanitize',
-        'ngMaterial',
-        'ngMdIcons',
-        'ngQuill',
-        'nvd3',
-        'ui.knob'])
+      'dfxAppServices',
+      'dfxGControls',
+      'jkAngularCarousel',
+      'ngAnimate',
+      'ngMessages',
+      'ngRoute',
+      'ngSanitize',
+      'ngMaterial',
+      'ngMdIcons',
+      'ngQuill',
+      'nvd3',
+      'ui.knob'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider
         .theme('success-toast')

@@ -3,11 +3,11 @@
   window.name = "NG_DEFER_BOOTSTRAP!" + window.name;
 
   var cssDependencies = [
-    "/angular-jk-carousel/dist/jk-carousel.css",
-    "/angular-material/angular-material.css",
-    "/angular-material-icons/angular-material-icons.css",
-    "/nvd3/build/nv.d3.css",
-    "/dfxio/dfx-core-gcontrols.css"];
+    "/dist/jk-carousel.css",
+    "/angular-material.css",
+    "/angular-material-icons.css",
+    "/build/nv.d3.css",
+    "/dfx-core-gcontrols.css"];
 
   cssDependencies.forEach(function(dependency) {
     var head = document.getElementsByTagName('head')[0];
@@ -17,30 +17,27 @@
     link.setAttribute("rel", "stylesheet");
     link.setAttribute("type", "text/css");
 
-    //script.async = false;
-
     head.appendChild(link);
   });
 
-  var jsDependencies = ["/d3/d3.js",
-  "/nvd3/build/nv.d3.js",
-  "/angular-nvd3/dist/angular-nvd3.js",
-  "/ng-knob/dist/ng-knob.js",
-  "/angular-route/angular-route.js",
-  "/angular-animate/angular-animate.js",
-  "/angular-aria/angular-aria.js",
-  "/angular-material/angular-material.js",
-  "/angular-material-icons/angular-material-icons.js",
-  "/angular-messages/angular-messages.js",
-  "/angular-sanitize/angular-sanitize.js",
-  "/angular-ui-router/release/angular-ui-router.js",
-  "/angular-jk-carousel/dist/jk-carousel.js",
-  "/ng-quill/src/ng-quill.js",
-  "/components.json",
-  "/dfxio/dfxio.js",
-  "/dfxio/dfx.app.runtime.js",
-  "/dfxio/dfx.app.services.js",
-  "/dfxio/dfx.gcontrols.js"];
+  var jsDependencies = ["/d3.js",
+    "/build/nv.d3.js",
+    "/dist/angular-nvd3.js",
+    "/dist/ng-knob.js",
+    "/angular-route.js",
+    "/angular-animate.js",
+    "/angular-aria.js",
+    "/angular-material.js",
+    "/angular-material-icons/angular-material-icons.js",
+    "/angular-messages/angular-messages.js",
+    "/angular-sanitize/angular-sanitize.js",
+    "/dist/angular-jk-carousel/dist/jk-carousel.js",
+    "/src/ng-quill/src/ng-quill.js",
+    "/components.json",
+    "/dfxio.js",
+    "/dfx.app.runtime.js",
+    "/dfx.app.services.js",
+    "/dfx.gcontrols.js"];
 
   jsDependencies.forEach(function(dependency) {
     var body = document.getElementsByTagName('body')[0];
@@ -48,7 +45,7 @@
 
     script.src = dependency;
     script.async = false;
-    
+
     if(dependency === "/components.json") {
       script.setAttribute("id", "components");
       script.setAttribute("type", "application/json");
