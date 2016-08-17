@@ -24,6 +24,14 @@ Use `dfxio` as you would any other express middleware:
     
     app.use(dfxio);
 
+Make sure to statically serve the directory for dfxio components:
+
+    app.use(express.static(path.join(__dirname, '../dfxio_components')));
+
+Add this to your index.html (or any page you wish to load dfx components on):
+
+    <script src="/dfxio-static/client_scripts/inject.js"></script>
+
 ## Contributors:
   - Michael Bae @ Cedrus
   - Linda Kung @ Cedrus
