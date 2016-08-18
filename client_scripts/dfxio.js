@@ -58,6 +58,43 @@
     };
   };
 
+  var dfxioPubSub = function() {
+
+    var obj = {};
+
+    function makeUnsubscribe(channel, key) {
+      return function unsubscribe() {
+        delete obj[channel][key];
+      };
+    }
+
+    function subscribe(channel, callback) {
+      var uid = Date.now() + Math.floor(Math.random() * 10000);
+      obj[channel] = obj[channel] || {};
+      obj[channel][uid] = callback;
+      return makeUnsubscribe(obj[channel], uid);
+    };
+
+    function broadcast(channel, message) {
+      Object.keys(obj[channel]).forEach(function(key) {
+        var subscriber = obj[channel][key];
+        subscriber(message, makeUnsubscribe(obj[channel], key)); 
+      }); 
+    };
+
+    return {
+      
+      _: {
+        makeUnsubscribe: makeUnsubscribe 
+      },
+
+      broadcast: broadcast,
+      subscribe: subscribe
+
+    }
+
+  };
+
   angular
     .module('dfxioModule', ['dfxAppRuntime',
       'dfxAppServices',
@@ -80,6 +117,7 @@
     })
     .controller('dfxioController', function ($scope) {
     })
-    .directive('dfxio', dfxio);
+    .directive('dfxio', dfxio)
+    .factory('dfxioPubSub', dfxioPubSub);
 
 })(angular);
