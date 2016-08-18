@@ -118,6 +118,13 @@
     .controller('dfxioController', function ($scope) {
     })
     .directive('dfxio', dfxio)
-    .factory('dfxioPubSub', dfxioPubSub);
+    .factory('dfxioPubSub', dfxioPubSub)
+    .service('dfxApiServices', function($http) {
+      return {
+        get: function(scope, path, options) {
+          return $http.get('/dfxapiservice/' + path);
+        } 
+      }; 
+    });
 
 })(angular);
