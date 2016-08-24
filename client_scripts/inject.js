@@ -20,7 +20,9 @@
     head.appendChild(link);
   });
 
-  var jsDependencies = ["/d3.js",
+  var jsDependencies = [
+    "/jquery.min.js",
+    "/d3.js",
     "/build/nv.d3.js",
     "/dist/angular-nvd3.js",
     "/dist/ng-knob.js",
