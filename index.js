@@ -15,6 +15,7 @@ router.get('/gcontrols/web/:file', function(req, res) {
 });
 
 var dfxioDependencies = [
+  "/jquery/dist/",
   "/d3",
   "/nvd3",
   "/angular-nvd3",
@@ -32,7 +33,16 @@ var dfxioDependencies = [
 ];
 
 dfxioDependencies.forEach(function (dependency) {
-  router.use('/dfxio-static/', express.static(path.join(__dirname, '../../node_modules' + dependency)));
+  // Check how to serve node module dependencies based on node version
+  if(process.versions.node[0] >= 5) {
+    // For node v5 or higher, serve dependenceis from root node_modules folder
+    router.use('/dfxio-static/', express.static(path.join(__dirname, '../../node_modules' + dependency)));
+  } else {
+    // For node v4 and lower, serve dependencies from this module's node_modules
+    // folder, since npm2 and below installs module dependencies in each module 
+    // folder instead of at the top level
+    router.use('/dfxio-static/', express.static(path.join(__dirname, '/node_modules' + dependency)));
+  }
 });
 
 router.get('/dfxapiservice/*', function(req, res) {
@@ -53,6 +63,7 @@ router.get('/dfxapiservice/*', function(req, res) {
   });
 });
 
+// TODO: Auto-generate components.json
 router.use(express.static(path.join(__dirname, '../../dfxio_components')));
 
 module.exports = router;
