@@ -45,6 +45,7 @@ dfxioDependencies.forEach(function (dependency) {
   }
 });
 
+// TODO: Auto-generate components.json
 router.use(express.static(path.join(__dirname, '../../dfxio_components')));
 
 module.exports = router;
