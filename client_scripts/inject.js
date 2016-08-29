@@ -21,31 +21,31 @@
   });
 
   var jsDependencies = [
-    "/jquery.min.js",
-    "/d3.js",
-    "/build/nv.d3.js",
-    "/dist/angular-nvd3.js",
-    "/dist/ng-knob.js",
-    "/angular-route.js",
-    "/angular-animate.js",
-    "/angular-aria.js",
-    "/angular-material.js",
-    "/angular-material-icons.js",
-    "/angular-messages.js",
-    "/angular-sanitize.js",
-    "/dist/jk-carousel.js",
-    "/src/ng-quill.js",
+    "/dfxio-static/jquery.min.js",
+    "/dfxio-static/d3.js",
+    "/dfxio-static/build/nv.d3.js",
+    "/dfxio-static/dist/angular-nvd3.js",
+    "/dfxio-static/dist/ng-knob.js",
+    "/dfxio-static/angular-route.js",
+    "/dfxio-static/angular-animate.js",
+    "/dfxio-static/angular-aria.js",
+    "/dfxio-static/angular-material.js",
+    "/dfxio-static/angular-material-icons.js",
+    "/dfxio-static/angular-messages.js",
+    "/dfxio-static/angular-sanitize.js",
+    "/dfxio-static/dist/jk-carousel.js",
+    "/dfxio-static/src/ng-quill.js",
     "/components.json",
-    "/client_scripts/dfxio.js",
-    "/client_scripts/dfx.app.runtime.js",
-    "/client_scripts/dfx.app.services.js",
-    "/client_scripts/dfx.gcontrols.js"];
+    "/dfxio/client_scripts/dfxio.js",
+    "/dfxio/client_scripts/dfx.app.runtime.js",
+    "/dfxio/client_scripts/dfx.app.services.js",
+    "/dfxio/client_scripts/dfx.gcontrols.js"];
 
   jsDependencies.forEach(function(dependency) {
     var body = document.getElementsByTagName('body')[0];
     var script = document.createElement('script');
 
-    script.src = '/dfxio-static' + dependency;
+    script.src = dependency;
     script.async = false;
 
     if(dependency === "/components.json") {

@@ -53,7 +53,7 @@ Add this to your index.html (or any page you wish to load dfx components on):
 
     <script src="/example/angular.js"></script>
     <!-- this should be after the angular script tag -->
-    <script src="/dfxio-static/client_scripts/inject.js"></script>
+    <script src="/dfxio/inject.js"></script>
     <!-- should be before your own javascript files -->
 
 ## Contributors:
