@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var npmi = require('npmi');
 
 router.get('/dfxio/:file', function(req, res) {
   var fileName = req.params.file;
@@ -40,7 +41,7 @@ dfxioDependencies.forEach(function (dependency) {
   // folder instead of at the top level, always check dfxio/node_modules first
   router.use('/dfxio-static/', express.static(path.join(__dirname, '/node_modules' + dependency)));
 
-  if(process.versions.node[0] >= 5) {
+  if(parseInt(npmi.NPM_VERSION) >= 3) {
     // For node v5 or higher, serve dependenceis from root node_modules folder
     router.use('/dfxio-static/', express.static(path.join(__dirname, '../../node_modules' + dependency)));
   }

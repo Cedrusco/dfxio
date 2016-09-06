@@ -1,6 +1,6 @@
 {
   "name": "dfxio",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "jquery": "2.2.4",
     "ng-knob": "https://github.com/RadMie/ng-knob.git",
     "ng-quill": "^1.5.2",
+    "npmi": "^2.0.1",
     "nvd3": "^1.8.4"
   }
 }
