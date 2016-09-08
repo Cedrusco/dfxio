@@ -8,7 +8,9 @@
   "classes":      { "value": "" },
   "style":        { "value": "" },
   "bodyStyle":    { "value": "" },
+  "dynamicClasses": { "value": "" },
   "flex":         { "value": "100" },
+  "autoHeight":   { "value": false },
   "display":      { "value": "true" },
   "title":        { "value": "'This is a title'" },
   "titleVisible": { "value": true },
@@ -78,6 +80,35 @@
             "menuItems": { "value": [] }
           }
         ]
+      },
+      "menuItemsType":  { "value": "static" },
+      "menuItemNames": {
+        "value": {
+          "main": {
+            "source": "",
+            "label": "",
+            "type": "",
+            "icon": {"value": "", "name":"", "type":""},
+            "shortcut": "",
+            "notification": "",
+            "display": "",
+            "disabled": "",
+            "onclick": "",
+            "scopeItems": ""
+          },
+          "state": {
+            "name": "",
+            "binding": "",
+            "checkedIcon": {"value":"","name":"","type":"","style":"","class":""},
+            "uncheckedIcon": {"value":"","name":"","type":"","style":"","class":""}
+          },
+          "waiting": {
+            "name": "",
+            "binding":"",
+            "autoDisabled":"",
+            "icon": {"value":"","name":"","type":"","style":"","class":""}
+          }
+        }
       }
     },
     "rightMenu": {
@@ -126,12 +157,42 @@
             "menuItems": { "value": [] }
           }
         ]
+      },
+      "menuItemsType":  { "value": "static" },
+      "menuItemNames": {
+        "value": {
+          "main": {
+            "source": "",
+            "label": "",
+            "type": "",
+            "icon": {"value": "", "name":"", "type":""},
+            "shortcut": "",
+            "notification": "",
+            "display": "",
+            "disabled": "",
+            "onclick": "",
+            "scopeItems": ""
+          },
+          "state": {
+            "name": "",
+            "binding": "",
+            "checkedIcon": {"value":"","name":"","type":"","style":"","class":""},
+            "uncheckedIcon": {"value":"","name":"","type":"","style":"","class":""}
+          },
+          "waiting": {
+            "name": "",
+            "binding":"",
+            "autoDisabled":"",
+            "icon": {"value":"","name":"","type":"","style":"","class":""}
+          }
+        }
       }
     }
   },
   "layout": {
     "rows": [
       {
+        "height":          { "value": "100" },
         "cols": [
           {
             "width":          { "value": "100" },
