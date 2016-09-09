@@ -78,14 +78,14 @@
     function broadcast(channel, message) {
       Object.keys(obj[channel]).forEach(function(key) {
         var subscriber = obj[channel][key];
-        subscriber(message, makeUnsubscribe(obj[channel], key)); 
-      }); 
+        subscriber(message, makeUnsubscribe(obj[channel], key));
+      });
     };
 
     return {
-      
+
       _: {
-        makeUnsubscribe: makeUnsubscribe 
+        makeUnsubscribe: makeUnsubscribe
       },
 
       broadcast: broadcast,
@@ -108,6 +108,7 @@
       'ngMdIcons',
       'ngQuill',
       'nvd3',
+	  'quill',
       'ui.knob'])
     .config(function($mdThemingProvider) {
       $mdThemingProvider
@@ -123,8 +124,8 @@
       return {
         get: function(scope, path, options) {
           return $http.get('/dfxapiservice/' + path);
-        } 
-      }; 
+        }
+      };
     });
 
 })(angular);
