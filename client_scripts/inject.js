@@ -34,8 +34,6 @@
     "/dfxio-static/angular-messages.js",
     "/dfxio-static/angular-sanitize.js",
     "/dfxio-static/dist/jk-carousel.js",
-	"/dfxio-static/dist/quill.js",
-    "/dfxio-static/src/ng-quill.js",
     "/components.json",
     "/dfxio/client_scripts/dfxio.js",
     "/dfxio/client_scripts/dfx.app.runtime.js",

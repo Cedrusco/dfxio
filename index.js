@@ -29,8 +29,6 @@ var dfxioDependencies = [
   "/angular-messages",
   "/angular-sanitize",
   "/angular-jk-carousel",
-  "/quill",
-  "/ng-quill",
   "/dfxio"
 ];
 
