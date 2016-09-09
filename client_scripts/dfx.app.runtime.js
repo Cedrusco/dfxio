@@ -310,19 +310,29 @@ dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeo
                 $scope.view_id = $attrs.id;
                 $scope.$parent.view_id = $attrs.id;
                 $scope.$parent.dfxViewCard = $attrs.dfxViewCard;
-                $scope.$watch('dfxViewCard', function() {
-                    angular.element($('#' + $scope.view_id)).html('');
-                    // var page_scope = $scope.$parent.$parent.$parent.$parent;
-                    // if (page_scope && page_scope.page_preview) {
-                    //     $http.get( '/studio/widget/item/' + page_scope.$parent.app_name + '/' + $attrs.dfxView + '/' + page_scope.$parent.platform ).success(function(response) {
-                    //         $scope.addComponents( (JSON.parse(response.src)).definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
-                    //     });
-                    // } else {
-                    // TODO possibly look for a better solution to what we have below, maybe dynamically look up the json path rather than relying on the directory structure convention we set
-                        $http.get( $attrs.dfxView + '/' + $attrs.dfxView + '.json' ).success(function(response) {
-                            $scope.addComponents( response.definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
-                        });
-                    // }
+                $scope.$watch('dfxViewCard', function(new_card, old_card) {
+					if (new_card!=null) {
+	                    angular.element($('#' + $scope.view_id)).html('');
+	                    // var page_scope = $scope.$parent.$parent.$parent.$parent;
+	                    // if (page_scope && page_scope.page_preview) {
+	                    //     $http.get( '/studio/widget/item/' + page_scope.$parent.app_name + '/' + $attrs.dfxView + '/' + page_scope.$parent.platform ).success(function(response) {
+	                    //         $scope.addComponents( (JSON.parse(response.src)).definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
+	                    //     });
+	                    // } else {
+	                    // TODO possibly look for a better solution to what we have below, maybe dynamically look up the json path rather than relying on the directory structure convention we set
+	                        $http.get( $attrs.dfxView + '/' + $attrs.dfxView + '.json' ).success(function(response) {
+								var animation = (response.definition[new_card][0].animation) ? response.definition[new_card][0].animation : {
+	                              in: 'fadeIn',
+	                              out: 'slideOutLeft'
+	                            };
+								$('#' + $scope.view_id).removeClass().addClass('animated ' + animation.out + ' flex layout-column').one('animationend', function(eventOne) {
+                                  angular.element($('#' + $scope.view_id)).html('');
+                                  $('#' + $scope.view_id).removeClass().addClass('animated ' + animation.in + ' flex layout-column');
+                                  $scope.addComponents( response.definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
+                                });
+	                        });
+	                    // }
+					}
                 });
             }, 0);
         }
