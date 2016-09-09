@@ -309,7 +309,7 @@ dfxAppRuntime.directive('dfxViewPreviewInDialog', [ '$http', function( $http ) {
             var view_object = $('#' + $scope.$parent._view_id)[0];
             var component_id = $('div:first',view_object).attr('id');
             var widget_definition = window.localStorage.getItem('dfx_' + $attrs.dfxViewPreviewInDialog);
-	        $http.get($attrs.dfxView + '/' + $attrs.dfxView + '.json').then(function (response) {
+	        $http.get($attrs.dfxViewPreviewInDialog + '/' + $attrs.dfxViewPreviewInDialog + '.json').then(function (response) {
                 $scope.addComponents( response.definition, { "id": "dfx_view_preview_container_in_dialog_" + component_id  }, '', $attrs.dfxCard, 'dfx_view_preview_container_in_dialog_' + component_id  );
             }, function (err) {
                 console.log("Can't get view " + $attrs.dfxViewPreviewInDialog + " definition");
