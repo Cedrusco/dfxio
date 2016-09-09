@@ -30,6 +30,7 @@ var dfxioDependencies = [
   "/angular-sanitize",
   "/angular-jk-carousel",
   "/ng-quill",
+  "/quill",
   "/dfxio"
 ];
 
@@ -37,7 +38,7 @@ dfxioDependencies.forEach(function (dependency) {
   // Check how to serve node module dependencies based on node version
 
   // For node v4 and lower, serve dependencies from this module's node_modules
-  // folder, since npm2 and below installs module dependencies in each module 
+  // folder, since npm2 and below installs module dependencies in each module
   // folder instead of at the top level, always check dfxio/node_modules first
   router.use('/dfxio-static/', express.static(path.join(__dirname, '/node_modules' + dependency)));
 
@@ -60,9 +61,9 @@ router.get('/dfxapiservice/*', function(req, res) {
     auth: {
       user: proxy.username,
       pass: proxy.password
-    } 
+    }
   }, function(err, response, body) {
-    res.json({ data: JSON.parse(body) }); 
+    res.json({ data: JSON.parse(body) });
   });
 });
 
