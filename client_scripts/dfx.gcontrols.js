@@ -569,6 +569,7 @@ dfxGControls.directive('dfxGcWebInput', ['$timeout', '$compile', function($timeo
                     scope.isSimpleIcon = {"value": true};
                     if(scope.attributes.icon.value!==''){
                         if(scope.attributes.icon.value.indexOf('$dfx_item')>-1){
+                            scope.isSimpleIcon.value = false;
                             scope.attributes.icon.value = '' + scope.attributes.icon.value;
                         }else if(scope.attributes.icon.value.indexOf(".")>-1 || scope.attributes.icon.value.indexOf("[")>-1){
                             scope.isSimpleIcon.value = false;
@@ -7102,6 +7103,7 @@ dfxGControls.directive('dfxGcWebRichtext', function($timeout, $compile) {
                 scope.attributes.bindedData.status = "overridden";
                 scope.attributes.toolbar.status = "overridden";
                 scope.attributes.flex.status = "overridden";
+                $(element).css('opacity', 0);
                 scope.changeWidth = function(){
                     $('#' + scope.component_id).css('width', scope.attributes.flex.value + '%');
                 };
@@ -7114,7 +7116,7 @@ dfxGControls.directive('dfxGcWebRichtext', function($timeout, $compile) {
                 } else {
                     dfxRichText += 'ng-model="attributes.bindedData.value" ';
                 }
-                dfxRichText += 'toolbar-entries="init" toolbar="true" show-toolbar="'+scope.attributes.toolbar.visible.value+'" link-tooltip="true" image-tooltip="true" editor-required="true" required="" error-class="input-error" class="dfx-core-gc-richtext"';
+                dfxRichText += 'toolbar-entries="<<toolbarEntries>>" toolbar="true" show-toolbar="'+scope.attributes.toolbar.visible.value+'" link-tooltip="true" image-tooltip="true" editor-required="true" required="" error-class="input-error" class="dfx-core-gc-richtext"';
                 if (!angular.isDefined(attrs.dfxGcDesign) && !angular.isDefined(attrs.dfxGcEdit)) {
                     dfxRichText += scope.attributes.display.value !=='' ? 'ng-show="'+scope.attributes.display.value+'" ' : '';
                     dfxRichText += scope.attributes.disabled.value !=='' ? 'read-only="'+scope.attributes.disabled.value+'" ' : '';
@@ -7136,12 +7138,15 @@ dfxGControls.directive('dfxGcWebRichtext', function($timeout, $compile) {
                 }
                 dfxRichText += '></ng-quill-editor>';
                 scope.rebuildQuillEditor = function(){
+                    dfxRichText = dfxRichText.replace('<<toolbarEntries>>', scope.quillEditorEntries);
                     $("." + component.id + "_ng_quill_editor").html(dfxRichText);
-                    $('#' + component.id + ' ng-quill-editor').attr('toolbar-entries', scope.quillEditorEntries);
                     $timeout(function(){
                         $compile($("." + component.id + "_ng_quill_editor").contents())(scope);
-                        $('#' + component.id + ' ng-quill-editor');
-                    }, 0);
+                    }, 0).then(function(){
+                        $timeout(function() {
+                            $(element).css('opacity', 1);
+                        }, 250);
+                    });
                 };
                 scope.rebuildQuillEntries = function(){
                     scope.quillEditorEntries = '';
@@ -7159,7 +7164,7 @@ dfxGControls.directive('dfxGcWebRichtext', function($timeout, $compile) {
                 }, 0);
                 if (!angular.isDefined(attrs.dfxGcDesign) && !angular.isDefined(attrs.dfxGcEdit)) {
                     scope.$on("editorCreated", function (event, quillEditor) {
-                        scope.$gcscope.$watch('$gcscope[attributes.binding.value]', function(newValue, oldValue) {
+                        scope.$parent_scope.$watch('$parent_scope[attributes.binding.value]', function(newValue, oldValue) {
                             if ( newValue && angular.equals(newValue, oldValue) ) {
                                 $timeout(function(){
                                     quillEditor.setHTML(newValue);
@@ -9455,8 +9460,10 @@ dfxGControls.directive('dfxGcWebKnob', ['$timeout', '$compile', function($timeou
                                 })
                             }, 0);
                         } else if(scope.attributes.binding.value!=='' && isNaN(scope.attributes.binding.value)){
-                            $('.'+component.id+'_dfx_ng_knob').empty().html('<ui-knob value="$parent_scope[attributes.binding.value]" options="attributes.options.value"></ui-knob>');
-                            $timeout(function() {$compile($('.'+component.id+'_dfx_ng_knob').contents())(scope);}, 0);
+                            // var complexKnob = '<ui-knob value="$parent_scope.'+scope.attributes.binding.value+'" options="attributes.options.value"></ui-knob>';
+                            // $('.'+component.id+'_dfx_ng_knob').empty().html(complexKnob).promise().done(function(){
+                            //     $timeout(function() {$compile($('.'+component.id+'_dfx_ng_knob').contents())(scope);}, 0);
+                            // });
                         } else {
                             $('.'+component.id+'_dfx_ng_knob').empty().html('<ui-knob value="attributes.binding.value" options="attributes.options.value"></ui-knob>');
                             $timeout(function() {$compile($('.'+component.id+'_dfx_ng_knob').contents())(scope);}, 0);
@@ -9487,15 +9494,42 @@ dfxGControls.directive('dfxComplexNgModel', ['$compile', '$parse', function ($co
         restrict: 'A',
         terminal: true,
         priority: 100000,
+        transclude: true,
         scope: true,
         link: function (scope, element) {
-            var binding = scope.attributes.binding.value;
-            if(binding!==''){
+            var binding;
+            if(scope.attributes.binding.value && scope.attributes.binding.value !==''){
+                binding = scope.attributes.binding.value;
                 if(binding.indexOf('$dfx_item')===-1) binding = '$parent_scope.'+binding;
                 element.removeAttr('dfx-complex-ng-model');
                 element.attr('ng-model', binding);
                 $compile(element)(scope);
             }
+        }
+    };
+}]);
+
+/* Directive for Dynamic values */
+dfxGControls.directive('dfxComplexValue', ['$timeout', '$compile', '$parse', function ($timeout, $compile, $parse) {
+    return {
+        restrict: 'A',
+        terminal: true,
+        priority: 100000,
+        transclude: true,
+        scope: true,
+        link: function (scope, element) {
+            var binding,
+            interval = setInterval(function() {
+                if (typeof scope.attributes.binding === 'undefined') return;
+                clearInterval(interval);
+                binding = scope.attributes.binding.value;
+                if(binding !==''){
+                    if(binding.indexOf('$dfx_item')===-1) binding = '$parent_scope.'+binding;
+                    element.removeAttr('dfx-complex-value');
+                    element.attr('value', binding);
+                    $compile(element)(scope);
+                }
+            }, 10);
         }
     };
 }]);
