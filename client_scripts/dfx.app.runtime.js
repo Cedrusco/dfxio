@@ -302,6 +302,26 @@ dfxAppRuntime.directive('dfxViewWrapper', [ '$http', '$compile', function($http,
     }
 }]);
 
+dfxAppRuntime.directive('dfxViewPreviewInDialog', [ '$http', function( $http ) {
+    return {
+        restrict: 'A',
+        controller: function($scope, $element, $attrs) {
+            var view_object = $('#' + $scope.$parent._view_id)[0];
+            var component_id = $('div:first',view_object).attr('id');
+            var widget_definition = window.localStorage.getItem('dfx_' + $attrs.dfxViewPreviewInDialog);
+            if (widget_definition) {
+                $scope.addComponents( JSON.parse(widget_definition).definition, { "id": "dfx_view_preview_container_in_dialog_" + component_id  }, '', $attrs.dfxCard, 'dfx_view_preview_container_in_dialog_' + component_id  );
+            } else {
+                $http.get('views/' + $attrs.dfxViewPreviewInDialog + '.json').then(function (response) {
+                    $scope.addComponents( JSON.parse(response.data.src).definition, { "id": "dfx_view_preview_container_in_dialog_" + component_id  }, '', $attrs.dfxCard, 'dfx_view_preview_container_in_dialog_' + component_id  );
+                }, function (err) {
+                    console.log("Can't get view " + $attrs.dfxViewPreviewInDialog + " defintion");
+                });
+            }
+        }
+    }
+}]);
+
 dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeout) {
 	return {
     	restrict: 'A',
