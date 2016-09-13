@@ -105,9 +105,9 @@
       'ngSanitize',
       'ngMaterial',
       'ngMdIcons',
-      'ngQuill'
+      'ngQuill',
       'nvd3',
-      'ui.knob',
+      'ui.knob'
     ])
     .config(function($mdThemingProvider) {
       $mdThemingProvider
