@@ -12,6 +12,7 @@ This includes all the components required for a dreamface component to function.
 Including: 
   - angular material 
   - ng-knob
+  - ng-quill
   - d3
   - nv.d3
   - angular-nvd3
