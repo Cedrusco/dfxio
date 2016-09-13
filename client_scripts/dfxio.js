@@ -24,8 +24,9 @@
   }
 
   function loadNewScript(source) {
+    // use global document since Angular's $document is weak
     var head = document.getElementsByTagName('head')[0];
-    var script = document.createElement('script'); // use global document since Angular's $document is weak
+    var script = document.createElement('script');
 
     script.src = source;
     // async false may be required!
@@ -83,20 +84,18 @@
     };
 
     return {
-
       _: {
         makeUnsubscribe: makeUnsubscribe
       },
-
       broadcast: broadcast,
       subscribe: subscribe
-
     }
 
   };
 
   angular
-    .module('dfxioModule', ['dfxAppRuntime',
+    .module('dfxioModule', [
+      'dfxAppRuntime',
       'dfxAppServices',
       'dfxGControls',
       'jkAngularCarousel',
@@ -106,8 +105,10 @@
       'ngSanitize',
       'ngMaterial',
       'ngMdIcons',
+      'ngQuill'
       'nvd3',
-      'ui.knob'])
+      'ui.knob',
+    ])
     .config(function($mdThemingProvider) {
       $mdThemingProvider
         .theme('success-toast')

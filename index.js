@@ -16,20 +16,22 @@ router.get('/gcontrols/web/:file', function(req, res) {
 });
 
 var dfxioDependencies = [
-  "/jquery/dist/",
-  "/d3",
-  "/nvd3",
-  "/angular-nvd3",
-  "/ng-knob",
-  "/angular-route",
-  "/angular-animate",
-  "/angular-aria",
-  "/angular-material",
-  "/angular-material-icons",
-  "/angular-messages",
-  "/angular-sanitize",
-  "/angular-jk-carousel",
-  "/dfxio"
+  '/jquery/dist/',
+  '/d3',
+  '/nvd3',
+  '/angular-nvd3',
+  '/ng-knob',
+  '/angular-route',
+  '/angular-animate',
+  '/angular-aria',
+  '/angular-material',
+  '/angular-material-icons',
+  '/angular-messages',
+  '/angular-sanitize',
+  '/angular-jk-carousel',
+  '/quill',
+  '/ng-quill',
+  '/dfxio'
 ];
 
 dfxioDependencies.forEach(function (dependency) {
@@ -40,11 +42,10 @@ dfxioDependencies.forEach(function (dependency) {
   // folder instead of at the top level, always check dfxio/node_modules first
   router.use('/dfxio-static/', express.static(path.join(__dirname, '/node_modules' + dependency)));
 
-  if(parseInt(npmi.NPM_VERSION) >= 3) {
+  if (parseInt(npmi.NPM_VERSION) >= 3) {
     // For node v5 or higher, serve dependenceis from root node_modules folder
     router.use('/dfxio-static/', express.static(path.join(__dirname, '../../node_modules' + dependency)));
   }
-
 });
 
 router.get('/dfxapiservice/*', function(req, res) {
@@ -55,6 +56,7 @@ router.get('/dfxapiservice/*', function(req, res) {
   var proxy_port = proxy.port == 80 ? '' : ':' + proxy.port;
   var proxy_path = proxy.path || '';
   var proxy_url = proxy_host + proxy_port + proxy_path + api_path;
+
   request.post(proxy_url, {
     auth: {
       user: proxy.username,
