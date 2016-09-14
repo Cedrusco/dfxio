@@ -318,7 +318,7 @@ dfxAppRuntime.directive('dfxViewPreviewInDialog', [ '$http', function( $http ) {
     }
 }]);
 
-dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeout) {
+dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', 'dfxioPubSub', function($http, $timeout, dfxioPubSub) {
 	return {
     	restrict: 'A',
         controller: function($scope, $element, $attrs) {
@@ -346,6 +346,20 @@ dfxAppRuntime.directive('dfxView', [ '$http', '$timeout', function($http, $timeo
                                   $('#' + $scope.view_id).removeClass().addClass('animated ' + animation.in + ' flex layout-column');
                                   $scope.addComponents( response.definition, { "id": $scope.view_id }, '', $scope.dfxViewCard, $scope.view_id );
                                 });
+                                if(response.config){
+                                  if(typeof response.config.input !== 'undefined'){
+                                    var inputArray = response.config.input;
+                                    inputArray.forEach(function(input){
+                                      dfxioPubSub.subscribe(input.eventName, $scope.$parent[input.callback]);
+                                    });
+                                  }
+                                  if(typeof response.config.output !== 'undefined'){
+                                    var outputArray = response.config.output;
+                                    outputArray.forEach(function(input){
+                                      dfxioPubSub.broadcast(input.eventName, input.payload);
+                                    });
+                                  }
+                                }
 	                        });
 	                    // }
 					}

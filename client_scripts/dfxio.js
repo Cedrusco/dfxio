@@ -77,10 +77,12 @@
     };
 
     function broadcast(channel, message) {
+      if(typeof obj[channel] !== 'undefined'){
       Object.keys(obj[channel]).forEach(function(key) {
         var subscriber = obj[channel][key];
         subscriber(message, makeUnsubscribe(obj[channel], key));
       });
+      }
     };
 
     return {
