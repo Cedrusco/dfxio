@@ -43,7 +43,7 @@
     '/dfxio/client_scripts/dfxio.js',
     '/dfxio/client_scripts/dfx.app.runtime.js',
     '/dfxio/client_scripts/dfx.app.services.js',
-    '/dfxio/client_scripts/dfx.gcontrols.js'
+    '/dfxio/client_scripts/dfx.gcc.js'
   ];
 
   jsDependencies.forEach(function(dependency) {

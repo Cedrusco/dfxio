@@ -99,7 +99,7 @@
     .module('dfxioModule', [
       'dfxAppRuntime',
       'dfxAppServices',
-      'dfxGControls',
+      'dfxGCC',
       'jkAngularCarousel',
       'ngAnimate',
       'ngMessages',
